@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TE AMO MI PRINCESA</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+          overflow: hidden;
+          margin: 0;
+          padding: 0;
+          background-color: black;
+        }
+
+        body .square{
+          max-width: 100%;
+        }
+
+        .square {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background-color: white;
+          animation: square 5s linear infinite;
+          z-index: -1;
+        }
+
+        @keyframes square {
+          0% {
+            transform: translate(0, 0) rotate(0deg);
+          }
+          100% {
+            transform: translate(0, 100vh) rotate(360deg);
+          }
+        }
+
+        body .container-info{
+          background: transparent;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          z-index: 1;
+          color: white;
+          display: flex;
+          align-items: center;
+          align-content: center;
+        }
+        .container{
+          position: relative;
+          width: 100%;
+          text-align: center;
+        }
+        .container-btn{
+          display: inline-block;
+          width: 50%;
+        }
+        .row{
+          --bs-gutter-x: 1.5rem;
+          --bs-gutter-y: 0;
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: calc(-1 * var(--bs-gutter-y));
+          margin-right: calc(-0.5 * var(--bs-gutter-x));
+          margin-left: calc(-0.5 * var(--bs-gutter-x));
+        }
+        .row > * {
+          flex-shrink: 0;
+          width: 100%;
+          max-width: 100%;
+          padding-right: calc(var(--bs-gutter-x) * 0.5);
+          padding-left: calc(var(--bs-gutter-x) * 0.5);
+          margin-top: var(--bs-gutter-y);
+        }
+
+        .col {
+          flex: 1 0 0%;
+          padding: 1rem;
+        }
+        .col .btn{
+          width: 100%;
+          height: 8rem;
+        }
+
+        
+        @media (min-width: 576px){
+          .container-btn{
+            width: 100%;
+          }
+        }
+        @media (min-width: 768px){
+          .container-btn{
+            width: 90%;
+          }
+        }
+        @media (min-width: 992px){
+          .container-btn{
+            width: 80%;
+          }
+        }
+        @media (min-width: 1200px){
+          .container-btn{
+            width: 70%;
+          }
+        }
+        @media (min-width: 1400px){
+          .container-btn{
+            width: 60%;
+          }
+        }
+
+        .btn:hover{
+          transform: translateY(-5px);
+        }
+        .btn:active{
+          transform: translateY(3px);
+        }
+        
+        .btn{
+          outline: none;
+          text-decoration: none;
+          border-radius: 10px;
+          border: 1px solid black;
+          transition: all .3s ease-in-out;
+        }
+
+        .btn span{
+          /*font-family: 'Courier New', Courier, monospace;*/
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          font-size: 2.5rem;
+        }
+
+        .btn-feliz{
+          background: rgb(251, 255, 0);
+        }
+        .btn-feliz:hover{
+          box-shadow: 0 0 50px rgba(221, 255, 0, 0.8);
+        }
+
+        .btn-enojada{
+          background: rgb(255, 68, 0);
+        }
+        .btn-enojada:hover{
+          box-shadow: 0 0 50px rgba(255, 68, 0, 0.8);
+        }
+
+        .btn-triste{
+          background: rgb(0, 0, 255);
+        }
+        .btn-triste:hover{
+          box-shadow: 0 0 50px rgba(0, 0, 255, 0.8);
+        }
+
+        .btn-etresyansiedad{
+          background: rgb(125, 0, 125);
+        }
+        .btn-etresyansiedad:hover{
+          box-shadow: 0 0 50px rgba(125, 0, 125, 0.8);
+        }
+
+        .btn-extrañe{
+          background: rgb(255, 193, 203);
+        }
+        .btn-extrañe:hover{
+          box-shadow: 0 0 50px rgba(255, 193, 203, 0.8);
+        }
+        /* MODAL CONTAINER */
+        .modal-container {
+          overflow: hidden;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: none;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1;
+        }
+        
+        .modal {
+          position: relative;
+          width: 400px;
+          max-width: 100%;
+          padding: 20px;
+          border-radius: 0px;
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          animation: modal-show 0.3s ease-out;
+        }
+        
+        .hide {
+          animation: modal-hide 0.3s ease-out;
+        }
+        .modal .modal-header,
+        .modal .modal-body{
+          max-width: 100%;
+        }
+        
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .modal-header h2 {
+          margin: 0;
+        }
+        
+        .close-btn {
+          background-color: transparent;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+        }
+        
+        .modal-body {
+          margin-top: 20px;
+        }
+        
+        @keyframes modal-show {
+          from {
+            opacity: 0;
+            transform: translateY(-50%);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes modal-hide {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(-50%);
+          }
+        }
+        
+    </style>
+  </head>
+  <body>
+    <div class="container-info">
+        <div class="container">
+            <div class="container-btn">
+                <div class="row">
+                    <div class="col">
+                        <button onclick="nota(1);" class="btn btn-feliz">
+                          <span>
+                            Feliz
+                            &#128522;
+                          </span>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button onclick="nota(2);" class="btn btn-enojada">
+                          <span>
+                            Enojada
+                            &#128544;
+                          </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button onclick="nota(3);" class="btn btn-triste">
+                          <span>
+                            Triste
+                            &#128532;
+                          </span>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button onclick="nota(4);" class="btn btn-etresyansiedad">
+                          <span>
+                            Estresada
+                            &#128534;
+                          </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button onclick="nota(5);" class="btn btn-extrañe">
+                          <span>
+                            Te extraño
+                            &#129402;
+                          </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container">
+      <div class="modal hide">
+        <div class="modal-header">
+          <h2 id="titulo"></h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p id="frases"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const modal = document.querySelector('.modal');
+      const modalContainer = document.querySelector('.modal-container');
+      const closeBtn = document.querySelector('.close-btn');
+      const btnModal = document.getElementById('btn-modal');
+      
+      function nota(arreglo){
+        let color = '';
+        let title = '';
+        let frases = [];
+        switch(arreglo){
+          case 1://feliz
+            color = '#f7d51d';
+            title = 'Feliz &#128522;';
+            frases = ['RECUERDA QUE MERECES SER FELIZ',
+              'RECUERDA QUE ESTA FELICIDAD VA A DURAR SIEMPRE',
+              'RECUERDA  QUE TU CREAS TU PROPIA FELICIDAD',
+              'SIGUE EXPLORANDO LA FELICIDAD',
+              'DISFRUTA DE COSAS PEQUEÑAS, QUE SON GRANDES COMO EL SER FELIZ.',
+              'SONRÍE SIEMPRE, AMO VERTE FELIZ.',
+              'TU FELICIDAD ES LA MÍA.',
+              'EL SABER QUE ESTAS SIENDO FELIZ, ES COMO UN GRAN LOGRO PARA MI, SIGUE ESTANDO ASÍ.',
+              'EL COLOR AMARILLO ES TU COLOR PREFERIDO, MIS MOMENTOS CONTIGO ES LO QUE MAS DISFRUTO.',
+              'DAS COLOR A MI VIDA.',
+              'ME SIENTO MUY AFORTUNADO DE TENERTE.',
+              'NO QUIERO PERDERME DE TUS LOGROS.',
+              'HARÉ TODO POR SIEMPRE VERTE ASI DE FELIZ.',
+              'BRILLAS MAS QUE EL SOL CUANDO ERES FELIZ.',
+              'TODO LO QUE TENGO ES PARA TI,.',
+              'EN DÍAS FELICES SOLO NECESITAS SENTIR QUE PUEDES CONTAGIAR ESA MISMA FELICIDAD.',
+              'QUE BONITA TE VES SIENDO FELIZ.',
+              'TU SIEMPRE BUSCA SER FELIZ.',
+              'NO TE OLVIDES NUNCA SER FELIZ.',
+              'LA FELICIDAD LA TIENES SIEMPRE EN TUS MANOS, APROVÉCHALA Y NO DEJES DE SERLO.'];
+            break;
+          case 2://enojada
+            color = '#ff414d';
+            title = 'Enojada &#128544;';
+            frases = ['PERDÓN',
+              'QUIERO QUE ESTEMOS BIEN',
+              'NO SE CUAL FUE MI FALLA ESTA VEZ, PERO AQUÍ ESTOY.',
+              'ME GUSTARIA HABLAR CONTIGO Y TENER UNA CONVERSACIÓN SOBRE EL PORQUE ESTAS ASÍ.',
+              'ESPERO ENMENDAR LAS COSAS',
+              'CREO QUE NOS MERECEMOS UNA CHARLA',
+              'SOLUCIONEMOS LAS COSAS.',
+              'RECONOZCO MI FALLA, PERO ME GUSTARIA QUE HABLARAMOS.',
+              'TODO ESTARA BIEN, NO ME IRE DE AQUÍ.',
+              '¿ME PERDONAS?',
+              'SIENTO LO OCURRIDO.',
+              'NO COMETERE UN ERROR MAS GRANDE QUE SERIA DEJARTE IR ASI ENOJADA CONMIGO.',
+              'PRIMERO VAS TU ANTES QUE MI ORGULLO.',
+              'ESPERO QUE PUEDA HACERTE SENTIR MEJOR.',
+              'NO ESTES ENOJADA, SE QUE ES INEVITABLE EL SENTIMIENTO DE ENOJO PERO QUIERO QUE SEPAS QUE NO ME GUSTA ESTAR MAL CONTIGO.',
+              'ERES MI LUGAR SEGURO, QUIERO QUE SOLUCIONEMOS.',
+              'UNA DISCULPA, NO VOLVERA A SUCEDER.',
+              'NO OLVIDES EL PORQUE SEGUIMOS PODEMOS MAS QUE NUESTROS PROBLEMAS.',
+              'OCUPAMOS HABLAR.',
+              'SE QUE ESTAS MOLESTA, PERDÓN, TE AMO MUCHO.']
+            break;
+          case 3:// triste
+            color = '#2b73c9';
+            title = 'Triste &#128532;';
+            frases =  ['1.EN LOS DÍAS GRISES TE AMARE EL TRIPLE.',
+              'NO ESTARAS NUNCA SOLA.',
+              'LA TRISTEZA ES UN VENENO, TU MERECES COSAS BUENAS.',
+              'ANIMO MI PEQUEÑA, TODO SALDRA BIEN.',
+              'NO TE DESCOMPENSES, SOLO ES UN MAL RATO.',
+              'AL RATO EL SOL VOLVERÁ A SALIR.',
+              'HABRÁN DIAS EN LOS QUE NADA TE FRENARA.',
+              'TU PUEDES CON TODO.',
+              'ERES MUY VALIENTE.',
+              'ME SIENTO AFORTUNADO.',
+              'ME HACES SENTIR ORGULLOSO.',
+              'NO HABRÁN MAS DÍAS MALOS.',
+              'SON APRENDIZAJES QUE TE AYUDAN A HACER EL GRAN SER HUMANO QUE YA ERES.',
+              'SIENTETE ORGULLOSA DE TODO LO QUE LOGRAS Y HAS LOGRADO EN TODO ESTE TIEMPO.',
+              'TE HE DICHO QUE TE AMO, LO HAGO ENSERIO TE AMO MONTONES.',
+              'ERES LA NIÑA MAS HERMOSA.',
+              'NO SE QUE PASO O POR QUE TE SIENTES ASI PERO RECUERDA QUE VAS A BRILLAR SIEMPRE.',
+              'LOS PROBLEMAS, EL ANIMO, TODO MEJORARA.',
+              'CONFIA EN QUE JAMAS TE DEJARE SOLA.',
+              'ME HACES SENTIR MUY FELIZ, TE CONTAGIARE DE ESA FELICIDAD QUE TU ME BRINDAS A MI.',
+              'PODEMOS HABLAR',
+              'CUENTAME QUE SUCEDE Y LO SOLUCIONAMOS JUNTOS, RECUERDA QUE DOS CABEZAS PIENSAN MÁS QUE UNA.',
+              'NO TE ABANDONARE, NO ES JUSTO QUE RIAMOS JUNTOS Y LLORES SOLA.',
+              'SI ESTAS ABAJO, ME QUEDARE AHÍ A TU LADO HASTA QUE YA QUIERAS SEGUR CAMINANDO.',
+              'TODO ES MÁS BONITO SI ES CONTIGO.',
+              'TU ERES MI ARCOIRIS, PORQUE EN MEDIO DE LA TORMENTA LUEGO SALES PARA DARME LUZ, YO QUIERO SER TU ARCOIRIS.',
+              'TODO SE SOLUCIONA, MÁS SI TU NO ESTARÁS SOLA.',
+              'ANIMO, ANIMO RARARARARARA.',
+              'ERES MUY FUERTE, TU PUEDES.',
+              'TE AMO MI NIÑA HERMOSA.',
+              'ERES MUY CAPAZ DE TODO, PORQUE NADA NI NADIE PODRÁ CONTIGO.']
+            break;
+          case 4://estres
+            color = '#8b5fbf';
+            title = 'Estresada &#128534;';
+            frases = ['RECUERDA QUE TODO ESTARA BIEN.',
+              'NO TIENES QUE PASAR POR NADA DE ESTO SOLA.',
+              'PUEDES DESAHOGARTE CONMIGO Y DECIRME LAS COSAS Y CAMBIAR PENSAMIENTOS.',
+              'HARÉ DE TUS DÍAS MEJOR.',
+              'ERES LA MEJOR.',
+              'TIENES MUCHAS CAPACIDADES, SE QUE PUEDES LOGRARLO.',
+              'NADA ES IMPOSIBLE.',
+              'LOS LIMITES ESTAN EN TU MENTE, TU TIENES MUCHO POR DAR.',
+              'NO TE DEJARE NUNCA SOLA.',
+              'CUENTAS CONMIGO.',
+              'POSIBLEMENTE ES ALGO DE LA U, ALGO QUE TE TIENE REALMENTE MUY ESTRESADA PERO SE QUIEN ES MI NOVIA Y VAS  A LOGRARLO TODO.',
+              'HAY DÍAS  COMPLICADOS PERO NADA QUE NO SEA IMPOSIBLE MEJORAR.',
+              'PUEDES CON TODO.',
+              'ERES MUY VALIENTE Y NADA PODRA CONTIGO.',
+              'POCO A POCO, PASO A PASO, PERO LLEGANDO LEJOS.',
+              'DIRIGE ESOS PENSAMIENTOS A OTRO LADO, PORQUE RECUERDATE A TI MISMA LO MARAVILLOSA QUE ERES.',
+              'ESTOY ENAMORADO DE TI, NO TE DEJARE SOLA.',
+              'YA CASI PASARÁ TODO LO QUE AHORA PREOCUPA Y DAÑA, ESTARA TODO MUY BIEN.',
+              'TU OBJETIVO ES SER TU, ASI QUE PODRAS MI NIÑA.',
+              'TENEMOS TIEMPO DE CAMBIAR LAS COSAS Y HACER LAS  COSAS PARA QUE TE SIENTAS MEJOR.']
+            break;
+          case 5://te extraño
+            color = '#f082ac';
+            title = 'Te extraño &#129402;';
+            frases = ['AQUÍ SIEMPRE ESTARÉ PARA TI.',
+              'TE ESTOY PENSANDO, NO IMPORTA LA HORA QUE LO VEAS O LO LEAS.',
+              'LA DISTANCIA IMPLICA MUCHAS COSAS PERO SERÉ SIEMPRE TU APOYO.',
+              'EL AMOR SUPERA TODA DISTANCIA QUE NOS SEPARA.',
+              'YO TAMBIÉN TE EXTRAÑO.',
+              'DIME LO QUE ESTAS SINTIENDO, PARA MARCARTE Y QUE NO TE SIENTAS SOLA.',
+              'ESTO ES TEMPORAL PRONTO ESTAREMOS JUNTOS.',
+              'LA DISTANCIA NOS HA HECHO MUY FUERTES, ESTO PASARA.',
+              'MI SONRISA ESTA LISTA PARA CUANDO TE VEA.',
+              'LEJOS PERO PENSÁNDOTE Y ANHELANDOTE TODO EL TIEMPO.',
+              'TE AMO MUCHO',
+              'QUIERO QUE SEPAS QUE NO ESTAS SOLA.',
+              'TE EXTRAÑO TAMBIÉN, MAS DE LO QUE LAS PALABRAS PUEDAN EXPRESAR.',
+              '¿VEMOS UNA PELÍCULA?',
+              'TE MANDO MUCHOS ABRAZOS.',
+              'PASAREMOS TIEMPO JUNTOS, SOLO NO TE RINDAS.',
+              'PIENSA EN MI CON COSAS BONITAS, YO TAMBIÉN YA TE EXTRAÑO.',
+              'TE QUIERO ESCUCHAR',
+              'ESTO ES DE VALIENTES Y LO VAMOS A SUPERAR.',
+              'HEMOS LLEGADO HASTA AQUÍ PARA RECORDAR EL PORQUE TENEMOS QUE EXTRAÑARNOS TANTO PERO TODO TIENE UN SIGNIFICADO Y ESTARÁ TODO BIEN, SOLO NO DUDES DE NOSOTROS Y DEL AMOR QUE SIENTO POR TI.']
+            break;
+        }
+        //#f7d51d -> AMARILLO
+        //#ff414d -> ROJO
+        //#2b73c9 -> AZUL
+        //#8b5fbf -> MORADO
+        //#f082ac -> ROSADO
+        modal.style.backgroundColor = color;
+        document.getElementById("titulo").innerHTML = title;
+        document.getElementById("frases").innerHTML = frases[Math.floor(Math.random() * frases.length)];
+        showModal();
+      }
+
+      //lineas para generar el modal
+          
+      function showModal() {
+        modalContainer.style.display = 'flex';
+        modal.classList.remove('hide');
+      }
+      
+      function hideModal() {
+        modal.classList.add('hide');
+        setTimeout(() => {
+          modalContainer.style.display = 'none';
+        }, 300);
+      }
+      
+      modalContainer.addEventListener('click', (event) => {
+        if (event.target === modalContainer) {
+          hideModal();
+        }
+      });
+      
+      closeBtn.addEventListener('click', hideModal);
+      
+      
+      //lineas para generar el fondo
+        function createSquare() {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            square.style.left = Math.random() * window.innerWidth + 'px';
+            square.style.animationDuration = Math.random() * 2 + 3 + 's';
+            square.style.width = Math.floor(Math.random() * 40) + 10 + 'px';
+            square.style.height = square.style.width;
+            square.style.backgroundColor = getRandomColor();
+            document.body.appendChild(square);
+          
+            setTimeout(() => {
+              square.remove();
+            }, 8000);
+          }
+          
+          function getRandomColor() {
+            const colors = ['#f7d51d', '#ff414d', '#2b73c9', '#8b5fbf', '#f082ac'];
+            return colors[Math.floor(Math.random() * colors.length)];
+          }
+          
+          setInterval(createSquare, 150);        
+    </script>
+  </body>
+</html>
